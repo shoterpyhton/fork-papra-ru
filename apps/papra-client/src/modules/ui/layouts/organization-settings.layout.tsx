@@ -1,7 +1,10 @@
 import type { ParentComponent } from 'solid-js';
 import { A, useParams } from '@solidjs/router';
+import { For } from 'solid-js';
 import { useI18n } from '@/modules/i18n/i18n.provider';
+import { cn } from '@/modules/shared/style/cn';
 import { Button } from '../components/button';
+import { Sheet, SheetContent, SheetTrigger } from '../components/sheet';
 import { SideNav } from './sidenav.layout';
 
 export const OrganizationSettingsLayout: ParentComponent = (props) => {
@@ -31,26 +34,47 @@ export const OrganizationSettingsLayout: ParentComponent = (props) => {
     },
   ];
 
+  const SettingsHeader = () => (
+    <div class="pl-6 py-3 border-b border-b-border flex items-center gap-1">
+      <Button variant="ghost" size="icon" class="text-muted-foreground" as={A} href={`/organizations/${params.organizationId}`}>
+        <div class="i-tabler-arrow-left size-5" />
+      </Button>
+      <h1 class="text-base font-bold">
+        {t('organization.settings.title')}
+      </h1>
+    </div>
+  );
+
   return (
     <div class="flex flex-row h-screen min-h-0">
-      <div class="w-280px border-r border-r-border  flex-shrink-0 hidden md:block bg-card">
-
+      <div class="w-280px border-r border-r-border flex-shrink-0 hidden md:block bg-card">
         <SideNav
           mainMenu={getNavigationItems()}
-          header={() => (
-            <div class="pl-6 py-3 border-b border-b-border flex items-center gap-1">
-              <Button variant="ghost" size="icon" class="text-muted-foreground" as={A} href={`/organizations/${params.organizationId}`}>
-                <div class="i-tabler-arrow-left size-5" />
-              </Button>
-              <h1 class="text-base font-bold">
-                {t('organization.settings.title')}
-              </h1>
-            </div>
-          )}
+          header={SettingsHeader}
         />
-
       </div>
       <div class="flex-1 min-h-0 flex flex-col">
+        <div class="flex items-center px-4 pt-4 md:hidden">
+          <Button variant="ghost" size="icon" class="text-muted-foreground mr-2" as={A} href={`/organizations/${params.organizationId}`}>
+            <div class="i-tabler-arrow-left size-5" />
+          </Button>
+          <Sheet>
+            <SheetTrigger>
+              <Button variant="ghost" size="icon">
+                <div class="i-tabler-menu-2 size-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" class="bg-card p-0!">
+              <SideNav
+                mainMenu={getNavigationItems()}
+                header={SettingsHeader}
+              />
+            </SheetContent>
+          </Sheet>
+          <h1 class="text-base font-bold ml-2">
+            {t('organization.settings.title')}
+          </h1>
+        </div>
         {props.children}
       </div>
     </div>
