@@ -40,6 +40,9 @@ export const translations = {
   'auth.login.form.forgot-password.label': 'Forgot password?',
   'auth.login.form.submit': 'Login',
 
+  'auth.password.show': 'Show password',
+  'auth.password.hide': 'Hide password',
+
   'auth.login.two-factor.title': 'Two-Factor Verification',
   'auth.login.two-factor.description.totp': 'Enter the 6-digit verification code from your authenticator app.',
   'auth.login.two-factor.description.backup-code': 'Enter one of your backup codes to access your account.',

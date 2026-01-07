@@ -41,6 +41,9 @@ export const translations: Partial<TranslationsDictionary> = {
   'auth.login.form.forgot-password.label': 'Забыли пароль?',
   'auth.login.form.submit': 'Войти',
 
+  'auth.password.show': 'Показать пароль',
+  'auth.password.hide': 'Скрыть пароль',
+
   'auth.login.two-factor.title': 'Двухфакторная аутентификация',
   'auth.login.two-factor.description.totp': 'Введите 6-значный код из приложения-аутентификатора.',
   'auth.login.two-factor.description.backup-code': 'Введите резервный код для доступа к аккаунту.',
@@ -317,7 +320,7 @@ export const translations: Partial<TranslationsDictionary> = {
   // Documents
   'documents.list.title': 'Документы',
   'documents.list.no-documents.title': 'Нет документов',
-  'documents.list.no-documents.description': 'В этой организации пока нет документов. Начните с загрузки документов.',
+  'documents.list.no-documents.description': 'В этой папке пока нет документов. Начните с загрузки документов.',
   'documents.list.no-results': 'Документы не найдены',
   'documents.list.table.headers.file-name': 'Имя файла',
   'documents.list.table.headers.created': 'Создан',
@@ -679,7 +682,7 @@ export const translations: Partial<TranslationsDictionary> = {
   'api-errors.internal.error': 'Произошла ошибка. Попробуйте позже.',
   'api-errors.auth.invalid_origin': 'Неверный источник приложения. При самостоятельном хостинге убедитесь, что APP_BASE_URL соответствует текущему URL. Подробнее: https://docs.papra.app/resources/troubleshooting/#invalid-application-origin',
   'api-errors.organization.max_members_count_reached': 'Достигнут лимит участников и приглашений. Улучшите план для добавления участников.',
-  'api-errors.organization.has_active_subscription': 'Нельзя удалить организацию с активной подпиской. Сначала отмените подписку.',
+  'api-errors.organization.has_active_subscription': 'Нельзя удалить папку с активной подпиской. Сначала отмените подписку.',
   // Better auth api errors
   'api-errors.USER_NOT_FOUND': 'Пользователь не найден',
   'api-errors.FAILED_TO_CREATE_USER': 'Не удалось создать пользователя',
@@ -887,7 +890,7 @@ export const translations: Partial<TranslationsDictionary> = {
   'admin.user-detail.roles.title': 'Роли и разрешения',
   'admin.user-detail.roles.description': 'Роли и уровни доступа пользователя',
   'admin.user-detail.roles.empty': 'Нет назначенных ролей',
-  'admin.user-detail.organizations.title': 'Организации ({{ count }})',
+  'admin.user-detail.organizations.title': 'Папки ({{ count }})',
   'admin.user-detail.organizations.description': 'Папки пользователя',
   'admin.user-detail.organizations.empty': 'Не состоит в папках',
   'admin.user-detail.organizations.table.id': 'ID',

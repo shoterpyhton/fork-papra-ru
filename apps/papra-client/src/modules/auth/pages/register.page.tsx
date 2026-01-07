@@ -90,14 +90,21 @@ export const EmailRegisterForm: Component = () => {
       </Field>
 
       <Field name="password">
-        {(field, inputProps) => (
-          <TextFieldRoot class="flex flex-col gap-1 mb-4">
-            <TextFieldLabel for="password">{t('auth.register.form.password.label')}</TextFieldLabel>
-
-            <TextField type="password" id="password" placeholder={t('auth.register.form.password.placeholder')} {...inputProps} value={field.value} aria-invalid={Boolean(field.error)} />
-            {field.error && <div class="text-red-500 text-sm">{field.error}</div>}
-          </TextFieldRoot>
-        )}
+        {(field, inputProps) => {
+          const [showPassword, setShowPassword] = createSignal(false);
+          return (
+            <TextFieldRoot class="flex flex-col gap-1 mb-4">
+              <TextFieldLabel for="password">{t('auth.register.form.password.label')}</TextFieldLabel>
+              <div class="relative">
+                <TextField type={showPassword() ? 'text' : 'password'} id="password" placeholder={t('auth.register.form.password.placeholder')} {...inputProps} value={field.value} aria-invalid={Boolean(field.error)} class="pr-10" />
+                <button type="button" class="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground" onClick={() => setShowPassword(!showPassword())} aria-label={showPassword() ? t('auth.password.hide') : t('auth.password.show')}>
+                  <div class={showPassword() ? 'i-tabler-eye-off size-5' : 'i-tabler-eye size-5'} />
+                </button>
+              </div>
+              {field.error && <div class="text-red-500 text-sm">{field.error}</div>}
+            </TextFieldRoot>
+          );
+        }}
       </Field>
 
       <Button type="submit" class="w-full">{t('auth.register.form.submit')}</Button>

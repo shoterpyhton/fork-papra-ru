@@ -28,13 +28,21 @@ export const ResetPasswordForm: Component<{ onSubmit: (args: { newPassword: stri
   return (
     <Form>
       <Field name="newPassword">
-        {(field, inputProps) => (
-          <TextFieldRoot class="flex flex-col gap-1 mb-4">
-            <TextFieldLabel for="newPassword">{t('auth.reset-password.form.new-password.label')}</TextFieldLabel>
-            <TextField type="password" id="newPassword" placeholder={t('auth.reset-password.form.new-password.placeholder')} {...inputProps} autoFocus value={field.value} aria-invalid={Boolean(field.error)} />
-            {field.error && <div class="text-red-500 text-sm">{field.error}</div>}
-          </TextFieldRoot>
-        )}
+        {(field, inputProps) => {
+          const [showPassword, setShowPassword] = createSignal(false);
+          return (
+            <TextFieldRoot class="flex flex-col gap-1 mb-4">
+              <TextFieldLabel for="newPassword">{t('auth.reset-password.form.new-password.label')}</TextFieldLabel>
+              <div class="relative">
+                <TextField type={showPassword() ? 'text' : 'password'} id="newPassword" placeholder={t('auth.reset-password.form.new-password.placeholder')} {...inputProps} autoFocus value={field.value} aria-invalid={Boolean(field.error)} class="pr-10" />
+                <button type="button" class="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground" onClick={() => setShowPassword(!showPassword())} aria-label={showPassword() ? t('auth.password.hide') : t('auth.password.show')}>
+                  <div class={showPassword() ? 'i-tabler-eye-off size-5' : 'i-tabler-eye size-5'} />
+                </button>
+              </div>
+              {field.error && <div class="text-red-500 text-sm">{field.error}</div>}
+            </TextFieldRoot>
+          );
+        }}
       </Field>
 
       <Button type="submit" class="w-full">
