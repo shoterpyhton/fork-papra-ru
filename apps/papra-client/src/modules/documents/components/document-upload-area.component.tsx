@@ -42,7 +42,7 @@ export const DocumentUploadArea: Component = () => {
       <p>{isDragging() ? t('documents.upload-area.drop-to-upload') : t('documents.upload-area.drag-and-drop')}</p>
 
       <Button class="mt-4" variant="outline" onClick={promptImport}>
-        <div class="i-tabler-upload mr-2" />
+        <div class="i-tabler-arrow-down mr-2" />
         {t('documents.upload-area.select-files')}
       </Button>
     </div>
