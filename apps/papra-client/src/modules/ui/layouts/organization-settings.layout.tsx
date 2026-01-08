@@ -1,8 +1,7 @@
 import type { ParentComponent } from 'solid-js';
 import { A, useParams } from '@solidjs/router';
-import { createSignal, For, onMount } from 'solid-js';
+import { createSignal, onMount } from 'solid-js';
 import { useI18n } from '@/modules/i18n/i18n.provider';
-import { cn } from '@/modules/shared/style/cn';
 import { Button } from '../components/button';
 import { Sheet, SheetContent, SheetTrigger } from '../components/sheet';
 import { SideNav } from './sidenav.layout';
@@ -23,21 +22,25 @@ export const OrganizationSettingsLayout: ParentComponent = (props) => {
       label: t('layout.menu.general-settings'),
       href: `/organizations/${params.organizationId}/settings`,
       icon: 'i-tabler-settings',
+      onClick: () => setIsSheetOpen(false),
     },
     {
       label: t('layout.menu.usage'),
       href: `/organizations/${params.organizationId}/settings/usage`,
       icon: 'i-tabler-chart-bar',
+      onClick: () => setIsSheetOpen(false),
     },
     {
       label: t('layout.menu.intake-emails'),
       href: `/organizations/${params.organizationId}/settings/intake-emails`,
       icon: 'i-tabler-mail',
+      onClick: () => setIsSheetOpen(false),
     },
     {
       label: t('layout.menu.webhooks'),
       href: `/organizations/${params.organizationId}/settings/webhooks`,
       icon: 'i-tabler-webhook',
+      onClick: () => setIsSheetOpen(false),
     },
   ];
 

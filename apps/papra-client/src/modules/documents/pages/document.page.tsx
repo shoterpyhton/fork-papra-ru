@@ -177,7 +177,7 @@ export const DocumentPage: Component = () => {
   const getDataUrl = () => documentFileQuery.data ? URL.createObjectURL(documentFileQuery.data) : undefined;
 
   return (
-    <div class="p-6 flex gap-6 h-full flex-col md:flex-row max-w-7xl mx-auto">
+    <div class="p-4 md:p-6 flex gap-4 md:gap-6 h-full flex-col md:flex-row max-w-7xl mx-auto overflow-x-hidden">
       <Suspense>
         <div class="md:flex-1 md:border-r">
           <Show when={documentQuery.data?.document}>
@@ -193,19 +193,25 @@ export const DocumentPage: Component = () => {
                       documentName: getDocument().name,
                     })}
                   >
-                    <h1 class="text-xl font-semibold lh-tight" title={getDocument().name}>
+                    <h1 class="text-lg md:text-xl font-semibold lh-tight break-all" title={getDocument().name}>
                       {getDocument().name}
                     </h1>
 
                     <div class="i-tabler-pencil size-4 text-muted-foreground group-hover:text-foreground transition-colors flex-shrink-0" />
                   </Button>
-                  <p class="text-sm text-muted-foreground mb-6">{getDocument().id}</p>
+                  <p class="text-xs md:text-sm text-muted-foreground mb-6 break-all">{getDocument().id}</p>
 
-                  <div class="flex gap-2 mb-2">
+                  <div class="flex gap-2 mb-2 flex-wrap">
                     <Button
-                      onClick={() => downloadFile({ fileName: getDocument().name, url: getDataUrl()! })}
+                      onClick={() => {
+                        const url = getDataUrl();
+                        if (url) {
+                          downloadFile({ fileName: getDocument().name, url });
+                        }
+                      }}
                       variant="outline"
                       size="sm"
+                      disabled={!getDataUrl()}
                     >
                       <div class="i-tabler-download size-4 mr-2" />
                       {t('documents.actions.download')}

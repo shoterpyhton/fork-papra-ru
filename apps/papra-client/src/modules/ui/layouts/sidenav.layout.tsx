@@ -27,8 +27,16 @@ type MenuItem = {
 };
 
 const MenuItemButton: Component<MenuItem> = (props) => {
+  const handleClick = () => {
+    props.onClick?.();
+  };
+
   return (
-    <Button class="justify-start items-center gap-2 dark:text-muted-foreground truncate" variant="ghost" {...(props.onClick ? { onClick: props.onClick } : { as: A, href: props.href, activeClass: 'bg-accent/50! text-accent-foreground! truncate', end: true } as ComponentProps<typeof Button>)}>
+    <Button
+      class="justify-start items-center gap-2 dark:text-muted-foreground truncate"
+      variant="ghost"
+      {...(props.href ? { as: A, href: props.href, activeClass: 'bg-accent/50! text-accent-foreground! truncate', end: true, onClick: handleClick } as ComponentProps<typeof Button> : { onClick: handleClick })}
+    >
       <div class={cn(props.icon, 'size-5 text-muted-foreground opacity-50')} />
       <div>{props.label}</div>
       {props.badge && <div class="ml-auto">{props.badge}</div>}
